@@ -1,8 +1,9 @@
 # MSA
 
-msa event system
+event system msa
 
 ## RUN
 
-pnpm install
-docker-compose up --build -d
+- pnpm install
+- docker-compose build --no-cache
+- docker-compose up -d
