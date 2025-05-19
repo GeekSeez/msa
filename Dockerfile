@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# 소스 복사 (node_modules는 .dockerignore로 제외되어야 함)
+# 소스 복사 (node_modules는 .dockerignore로 제외)
 COPY . .
 
 # 빌드할 서비스 지정 (auth-server, event-server, gateway-server 중 하나)
@@ -31,6 +31,9 @@ COPY --from=base /app/dist ./dist
 COPY --from=base /app/package*.json ./
 COPY --from=base /app/node_modules ./node_modules
 
-# 실행
+# 빌드 시 ARG를 런타임 환경변수로 설정
 ARG SERVICE
-CMD ["node", "./dist/apps/${SERVICE}/main.js"]
+ENV SERVICE=${SERVICE}
+
+# 쉘을 통해 환경변수 치환이 가능하게 실행
+CMD ["sh", "-c", "node ./dist/apps/${SERVICE}/main.js"]

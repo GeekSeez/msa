@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "rootDir": "./src",
+    "outDir": "../../dist/apps/gateway-server",
     "declaration": false,
     "incremental": true
   },

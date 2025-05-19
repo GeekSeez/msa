@@ -11,6 +11,10 @@ services:
       - "3001:3000"
     depends_on:
       - mongo
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/db
+      - JWT_SECRET=your_jwt_secret_key
+      - JWT_EXPIRES=3600s
 
   event-server:
     build:
@@ -22,6 +26,10 @@ services:
       - "3002:3000"
     depends_on:
       - mongo
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/db
+      - JWT_SECRET=your_jwt_secret_key
+      - JWT_EXPIRES=3600s
 
   gateway-server:
     build:
@@ -34,6 +42,10 @@ services:
     depends_on:
       - auth-server
       - event-server
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/db
+      - JWT_SECRET=your_jwt_secret_key
+      - JWT_EXPIRES=3600s
 
   mongo:
     image: mongo:7
